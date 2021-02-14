@@ -1,0 +1,145 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "dev-microservicestesting",
+    "version": "2021-02-12T16:06:28Z"
+  },
+  "servers": [
+    {
+      "url": "https://abcde12345.execute-api.eu-north-1.amazonaws.com/{basePath}",
+      "variables": {
+        "basePath": {
+          "default": "/dev"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/createOrder": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/microApiGa57HXBV198M2J"
+              }
+            }
+          },
+          "required": true
+        }
+      },
+      "options": {
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Access-Control-Allow-Methods": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Access-Control-Allow-Headers": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {}
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "microApiGa57HXBV198M2J": {
+        "title": "The root schema",
+        "required": [
+          "city",
+          "customerType",
+          "email",
+          "market",
+          "name",
+          "phone",
+          "products",
+          "street",
+          "totalPrice"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "title": "The name schema",
+            "type": "string",
+            "description": "TODO",
+            "default": "Firstname Lastname"
+          },
+          "email": {
+            "title": "The email schema",
+            "type": "string",
+            "description": "TODO",
+            "default": "firstname.lastname@somewhere.xyz"
+          },
+          "phone": {
+            "title": "The phone schema",
+            "type": "string",
+            "description": "TODO",
+            "default": "123123123123"
+          },
+          "street": {
+            "title": "The street schema",
+            "type": "string",
+            "description": "TODO",
+            "default": "Somestreet 120"
+          },
+          "city": {
+            "title": "The city schema",
+            "type": "string",
+            "description": "TODO",
+            "default": "Sometown"
+          },
+          "customerType": {
+            "title": "The customerType schema",
+            "type": "string",
+            "description": "TODO",
+            "default": "B2C"
+          },
+          "market": {
+            "title": "The market schema",
+            "type": "string",
+            "description": "TODO",
+            "default": "US"
+          },
+          "products": {
+            "title": "The products schema",
+            "type": "string",
+            "description": "TODO",
+            "default": ""
+          },
+          "totalPrice": {
+            "title": "The totalPrice schema",
+            "type": "number",
+            "description": "TODO",
+            "default": 0
+          },
+          "testId": {
+            "title": "The testId schema",
+            "type": "number",
+            "description": "TODO",
+            "default": 0
+          },
+          "orgNumber": {
+            "title": "The orgNumber schema",
+            "type": "number",
+            "description": "TODO",
+            "default": 0
+          }
+        }
+      }
+    }
+  }
+}

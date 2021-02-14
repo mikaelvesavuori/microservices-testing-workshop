@@ -1,0 +1,85 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "title": "The root schema",
+  "required": [
+    "name",
+    "email",
+    "phone",
+    "street",
+    "city",
+    "customerType",
+    "market",
+    "products",
+    "totalPrice"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "title": "The name schema",
+      "description": "Customer name",
+      "default": "Firstname Lastname"
+    },
+    "email": {
+      "type": "string",
+      "title": "The email schema",
+      "description": "Customer email",
+      "default": "firstname.lastname@somewhere.xyz"
+    },
+    "phone": {
+      "type": "string",
+      "title": "The phone schema",
+      "description": "Customer phone number",
+      "default": "123123123123"
+    },
+    "street": {
+      "type": "string",
+      "title": "The street schema",
+      "description": "Customer street address",
+      "default": "Somestreet 120"
+    },
+    "city": {
+      "type": "string",
+      "title": "The city schema",
+      "description": "Customer city",
+      "default": "Sometown"
+    },
+    "customerType": {
+      "type": "string",
+      "title": "The customerType schema",
+      "description": "Customer type",
+      "default": "B2C"
+    },
+    "market": {
+      "type": "string",
+      "title": "The market schema",
+      "description": "Customer market",
+      "default": "US"
+    },
+    "products": {
+      "type": "string",
+      "title": "The products schema",
+      "description": "Comma-separated string list of product IDs that have been purchased in this order",
+      "default": ""
+    },
+    "totalPrice": {
+      "type": "number",
+      "title": "The totalPrice schema",
+      "description": "Total price of wares in USD cents",
+      "default": 0
+    },
+    "testId": {
+      "type": "number",
+      "title": "The testId schema",
+      "description": "If this is a test, what is the test ID of this run?",
+      "default": 0
+    },
+    "orgNumber": {
+      "type": "number",
+      "title": "The orgNumber schema",
+      "description": "If this is a business user, what is the customer's organization number?",
+      "default": 0
+    }
+  }
+}

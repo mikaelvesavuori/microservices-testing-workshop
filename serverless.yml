@@ -1,0 +1,146 @@
+service:
+  name: microservices-testing-ws
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  frameworkVersion: "2"
+  stackTags:
+    Usage: microservices-testing-ws
+  tags:
+    Usage: microservices-testing-ws
+  tracing:
+    apiGateway: true
+  apiGateway:
+    minimumCompressionSize: 1024
+  region: ${opt:region, "eu-north-1"}
+  endpointType: EDGE
+  memorySize: 1024
+  timeout: 15
+  logRetentionInDays: 7
+  deploymentBucket:
+    blockPublicAccess: true
+    serverSideEncryption: AES256
+  iamRoleStatements:
+  - Effect: Allow
+    Action:
+      - xray:PutTelemetryRecords
+      - xray:PutTraceSegments
+    Resource: "*"
+
+custom:
+  allowedOrigin: "*" # Ideally don't use this; scope down to your actual domain
+  appDeliveryPage: https://mydomain.com/delivery.html?order=
+
+  aws:
+    awsAccountId: 123412341234
+    resources:
+      tableName: ${self:service.name}
+    arns:
+      dynamoTable: arn:aws:dynamodb:${self:provider.region}:${self:custom.aws.awsAccountId}:table/${self:custom.aws.resources.tableName}
+      eventbridgeBus: arn:aws:events:${self:provider.region}:${self:custom.aws.awsAccountId}:event-bus/default
+  webpack:
+    webpackConfig: 'webpack.config.js'
+    includeModules: true
+    packager: 'npm'
+    excludeFiles: src/**/*.test.js
+
+plugins:
+  - serverless-offline
+  - serverless-webpack
+  - serverless-iam-roles-per-function
+
+package:
+  individually: true
+  exclude:
+    - node_modules/aws-sdk/**
+    - node_modules/aws-lambda/**
+
+functions:
+  # Order service (public)
+  createOrder:
+    handler: src/microservices/order/controllers/CreateOrder.CreateOrder
+    iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - events:PutEvents
+      Resource: ${self:custom.aws.arns.eventbridgeBus}
+    events:
+    - http:
+        path: createOrder
+        method: POST
+        request:
+          schema:
+            application/json: ${file(api/schema.json)}
+        cors:
+          origin: ${self:custom.allowedOrigin}
+    environment:
+      ALLOWED_ORIGIN: ${self:custom.allowedOrigin}
+      REGION: ${self:provider.region}
+  # Database service (private), driven by event
+  writeOrder:
+    handler: src/microservices/database/controllers/WriteOrder.WriteOrder
+    timeout: 30
+    events:
+    - eventBridge:
+        pattern:
+          source:
+            - microservices-testing-ws.order
+          detail-type:
+            - OrderCreated
+    iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:PutItem
+      Resource:
+        -  ${self:custom.aws.arns.dynamoTable}
+    - Effect: Allow
+      Action:
+        - events:PutEvents
+      Resource:
+        - ${self:custom.aws.arns.eventbridgeBus}
+    environment:
+      TABLE_NAME: ${self:custom.aws.resources.tableName}
+      REGION: ${self:provider.region}
+  # Database service, used when running system test to verify written records
+  getOrders:
+    handler: src/microservices/database/controllers/GetOrders.GetOrders
+    timeout: 30
+    events:
+    - http:
+        path: getOrders
+        method: POST
+    iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Scan
+        - dynamodb:Query
+      Resource:
+        -  ${self:custom.aws.arns.dynamoTable}
+    environment:
+      TABLE_NAME: ${self:custom.aws.resources.tableName}
+      REGION: ${self:provider.region}
+
+# Create DynamoDB database
+resources:
+  Resources:
+    MicroservicesTestingWorkshopDb:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:service.name}
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+          - AttributeName: testId
+            AttributeType: N
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        GlobalSecondaryIndexes:
+          - IndexName: TestIdIndex
+            KeySchema:
+              - AttributeName: testId
+                KeyType: HASH
+            Projection:
+              ProjectionType: 'ALL'
+        BillingMode: PAY_PER_REQUEST
