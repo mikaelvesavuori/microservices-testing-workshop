@@ -126,17 +126,17 @@ Change `customerType` and `market` as needed. `orgNumber` and `testId` are not r
 ```
 POST https://{UNIQUE_ID}.execute-api.{REGION}.amazonaws.com/dev/createOrder
 {
-	"name": "Raina Mayert",
-	"email": "Lemuel_Mraz44@gmail.com",
-	"phone": "1-355-620-4168",
-	"street": "961 Jasper Forks",
-	"city": "Lake Gracieside",
-	"customerType": "B2B",
-	"market": "US",
-	"products": "BB001,BA002",
-	"totalPrice": 38500,
-	"orgNumber": 123123,
-	"testId": 409126
+  "name": "Raina Mayert",
+  "email": "Lemuel_Mraz44@gmail.com",
+  "phone": "1-355-620-4168",
+  "street": "961 Jasper Forks",
+  "city": "Lake Gracieside",
+  "customerType": "B2B",
+  "market": "US",
+  "products": "BB001,BA002",
+  "totalPrice": 38500,
+  "orgNumber": 123123,
+  "testId": 409126
 }
 ```
 
