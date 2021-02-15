@@ -6,7 +6,7 @@
   },
   "servers": [
     {
-      "url": "https://yvjvzwy652.execute-api.eu-north-1.amazonaws.com/{basePath}",
+      "url": "https://abcde12345.execute-api.eu-north-1.amazonaws.com/{basePath}",
       "variables": {
         "basePath": {
           "default": "/dev"
