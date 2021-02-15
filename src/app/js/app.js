@@ -1,7 +1,7 @@
 /**
  * ENDPOINTS
  */
-const AWS_ENDPOINT_ID = 'yvjvzwy652'; // EDIT THIS {{UNIQUE_ID}}
+const AWS_ENDPOINT_ID = 'abcde12345'; // EDIT THIS {{UNIQUE_ID}}
 const AWS_REGION = 'eu-north-1'; // EDIT THIS
 
 const CREATE_ORDER_ENDPOINT = `https://${AWS_ENDPOINT_ID}.execute-api.${AWS_REGION}.amazonaws.com/dev/createOrder`;
