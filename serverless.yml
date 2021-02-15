@@ -33,7 +33,7 @@ custom:
   appDeliveryPage: https://mydomain.com/delivery.html?order=
 
   aws:
-    awsAccountId: 123412341234
+    awsAccountId: 123412341234 # EDIT TO YOUR VALUE
     resources:
       tableName: ${self:service.name}
     arns:

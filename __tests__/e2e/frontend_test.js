@@ -52,7 +52,6 @@ Scenario('Order single item as MX B2C customer', ({ I }) => {
   I.click('#cartsymbol');
 
   I.selectOption('#country', 'MX');
-  I.fillField('#input-orgnumber', '123123123');
 
   I.fillField('#input-name', 'Anders Andersson');
   I.fillField('#input-street', 'Thisway 123');

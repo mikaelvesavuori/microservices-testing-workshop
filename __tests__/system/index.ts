@@ -22,7 +22,7 @@ const TEST_ID = generateTestId();
 // Time to wait until first verification
 const WAIT_TIME = 5000;
 // Time to wait until running next iteration in call-loop
-const LOOP_WAIT_TIME = 300;
+const LOOP_WAIT_TIME = 150;
 // How many test orders to produce
 const TEST_COUNT = 2;
 // Test can be an empty object, in which case defaults will be used

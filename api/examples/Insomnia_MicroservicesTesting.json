@@ -1,12 +1,12 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "dev-microservicestesting",
-    "version": "2021-02-12T16:06:28Z"
+    "title": "dev-microservices-testing-ws",
+    "version": "2021-02-15T10:25:15Z"
   },
   "servers": [
     {
-      "url": "https://abcde12345.execute-api.eu-north-1.amazonaws.com/{basePath}",
+      "url": "https://yvjvzwy652.execute-api.eu-north-1.amazonaws.com/{basePath}",
       "variables": {
         "basePath": {
           "default": "/dev"
@@ -21,7 +21,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/microApiGa57HXBV198M2J"
+                "$ref": "#/components/schemas/testiApiGa1F47Y3QZE3KJS"
               }
             }
           },
@@ -53,11 +53,14 @@
           }
         }
       }
+    },
+    "/getOrders": {
+      "post": {}
     }
   },
   "components": {
     "schemas": {
-      "microApiGa57HXBV198M2J": {
+      "testiApiGa1F47Y3QZE3KJS": {
         "title": "The root schema",
         "required": [
           "city",
@@ -72,71 +75,71 @@
         ],
         "type": "object",
         "properties": {
-          "name": {
-            "title": "The name schema",
+          "market": {
+            "title": "The market schema",
             "type": "string",
-            "description": "TODO",
-            "default": "Firstname Lastname"
-          },
-          "email": {
-            "title": "The email schema",
-            "type": "string",
-            "description": "TODO",
-            "default": "firstname.lastname@somewhere.xyz"
-          },
-          "phone": {
-            "title": "The phone schema",
-            "type": "string",
-            "description": "TODO",
-            "default": "123123123123"
-          },
-          "street": {
-            "title": "The street schema",
-            "type": "string",
-            "description": "TODO",
-            "default": "Somestreet 120"
-          },
-          "city": {
-            "title": "The city schema",
-            "type": "string",
-            "description": "TODO",
-            "default": "Sometown"
+            "description": "Customer market",
+            "default": "US"
           },
           "customerType": {
             "title": "The customerType schema",
             "type": "string",
-            "description": "TODO",
+            "description": "Customer type",
             "default": "B2C"
           },
-          "market": {
-            "title": "The market schema",
+          "phone": {
+            "title": "The phone schema",
             "type": "string",
-            "description": "TODO",
-            "default": "US"
+            "description": "Customer phone number",
+            "default": "123123123123"
           },
-          "products": {
-            "title": "The products schema",
+          "city": {
+            "title": "The city schema",
             "type": "string",
-            "description": "TODO",
-            "default": ""
+            "description": "Customer city",
+            "default": "Sometown"
           },
           "totalPrice": {
             "title": "The totalPrice schema",
             "type": "number",
-            "description": "TODO",
+            "description": "Total price of wares in USD cents",
             "default": 0
+          },
+          "street": {
+            "title": "The street schema",
+            "type": "string",
+            "description": "Customer street address",
+            "default": "Somestreet 120"
+          },
+          "name": {
+            "title": "The name schema",
+            "type": "string",
+            "description": "Customer name",
+            "default": "Firstname Lastname"
           },
           "testId": {
             "title": "The testId schema",
             "type": "number",
-            "description": "TODO",
+            "description": "If this is a test, what is the test ID of this run?",
             "default": 0
           },
           "orgNumber": {
             "title": "The orgNumber schema",
             "type": "number",
-            "description": "TODO",
+            "description": "If this is a business user, what is the customer's organization number?",
             "default": 0
+          },
+          "email": {
+            "title": "The email schema",
+            "type": "string",
+            "description": "Customer email",
+            "default": "firstname.lastname@somewhere.xyz"
+          },
+          "products": {
+            "title": "The products schema",
+            "type": "string",
+            "description": "Comma-separated string list of product IDs that have been purchased in this order",
+            "default": ""
           }
         }
       }

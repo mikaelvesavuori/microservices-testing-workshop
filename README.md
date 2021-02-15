@@ -152,7 +152,7 @@ Run `npm run dev` to start up the local web server. Go to one of the provided UR
 
 ### 3. Discovery and baseline quality
 
-Check out the directory structure. The backends follow the well-known Clean Architecture pattern.
+Check out the directory structure. The backends follow the well-known [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) pattern.
 
 Test ESLint by copying the following into a new file and saving it as `demo.js`:
 
@@ -242,3 +242,7 @@ You'll notice that only the "happy paths" are covered. Reference the Codecept (w
 It's located under `__tests__/system/`. Run it with `npm run test:system`. You will have to update the ID and region values in `__tests__/system/index.ts` to your values. This also requires that the stack is deployed with Serverless first, since this is all using live components.
 
 The system test is simple, in as far as in our basic demo application a fully-formed order is just an order in the database. You could add additional logic to verify fields and data in the data you receive from the data.
+
+### 11. Remove the stack
+
+Run `sls remove` to remove the backend stack from AWS.
