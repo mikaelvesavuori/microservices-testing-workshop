@@ -19,14 +19,6 @@ This repo contains:
 - [Eventbridge](https://aws.amazon.com/eventbridge/) message bus
 - [DynamoDB](https://aws.amazon.com/dynamodb/) NoSQL database
 
-How we work with quality here:
-
-- Linting with ESLint and Prettier
-- Typescript
-- Typedoc
-- Quicktype
-- Arkit
-
 Testing types demonstrated:
 
 - Static testing (linting etc)
@@ -35,6 +27,38 @@ Testing types demonstrated:
 - Integration testing
 - System testing
 - End-to-end (E2E) testing
+
+## Technology
+
+### Tooling
+
+- [Jest](https://jestjs.io)
+- [Codecept](https://codecept.io) (using [Playwright](https://github.com/microsoft/playwright))
+- [Faker](https://github.com/marak/Faker.js/)
+- [Quicktype](https://quicktype.io)
+- [Typedoc](https://typedoc.org)
+- [Arkit](https://arkit.pro/)
+
+### Tech stack
+
+- [Serverless Framework](https://www.serverless.com)
+- [Typescript](https://www.typescriptlang.org)
+- [Webpack](https://webpack.js.org)
+- [local-web-server](https://github.com/lwsjs/local-web-server)
+
+## Pre-requisites
+
+- [Node 14+](https://nodejs.org/en/download/) installed
+- [Serverless Framework 2.23.0+](https://www.serverless.com) installed
+- [An Amazon Web Services (AWS) account](https://aws.amazon.com/free/)
+- [AWS credentials available through your environment](https://www.serverless.com/framework/docs/providers/aws/guide/credentials/)
+- Some familiarity with programming (Javascript/Typescript/Node) and command-line usage will be very helpful
+
+## Installation and setup
+
+- Clone or download this repo
+- Navigate into the project folder or open it in your IDE (VS Code, Atom, Sublime or whatever you might be using)
+- Run `npm install` to install dependencies
 
 ## Workshop
 
@@ -71,49 +95,23 @@ Caveats:
 - Depending on whether you have used Git before or not on your system, there may pop up issues/requirements on SSH keys and stuff: Again I can't make guarantees about your system.
   Just before the workshop you will receive a message about how to clone the code repository. Cloning means that the code is pulled to your current directory, so again, make sure you know how to move around.
 
-## Technology
-
-### Tooling
-
-- [Jest](https://jestjs.io)
-- [Codecept](https://codecept.io) (using [Playwright](https://github.com/microsoft/playwright))
-- [Faker](https://github.com/marak/Faker.js/)
-- [Quicktype](https://quicktype.io)
-- [Typedoc](https://typedoc.org)
-- [Arkit](https://arkit.pro/)
-
-### Tech stack
-
-- [Serverless Framework](https://www.serverless.com)
-- [Typescript](https://www.typescriptlang.org)
-- [Webpack](https://webpack.js.org)
-- [local-web-server](https://github.com/lwsjs/local-web-server)
-
 ## Scenario
 
 ACME Corp. Potted Plants is ready to launch their first version of their service. Test-driven development was not a concern, so you'll come in to ensure (after the fact) that they will launch a truly awesome service.
 
 ![Frontend app](readme/frontend-front.png)
+_Frontend app_
+
 ![Frontend app cart](readme/frontend-cart.png)
+_Frontend app cart_
 
 ## Diagram
 
 ![AWS diagram](readme/diagram.png)
+_AWS diagram_
+
 ![AWS diagram with test boundaries](readme/diagram-tests.png)
-
-## Pre-requisites
-
-- [Node 14+](https://nodejs.org/en/download/) installed
-- [Serverless Framework 2.23.0+](https://www.serverless.com) installed
-- [An Amazon Web Services (AWS) account](https://aws.amazon.com/free/)
-- [AWS credentials available through your environment](https://www.serverless.com/framework/docs/providers/aws/guide/credentials/)
-- Some familiarity with programming (Javascript/Typescript/Node) and command-line usage will be very helpful
-
-## Installation and setup
-
-- Clone or download this repo
-- Navigate into the project folder or open it in your IDE (VS Code, Atom, Sublime or whatever you might be using)
-- Run `npm install` to install dependencies
+_AWS diagram with test boundaries_
 
 ## API documentation (for starting)
 
@@ -143,11 +141,6 @@ POST https://{UNIQUE_ID}.execute-api.{REGION}.amazonaws.com/dev/createOrder
 ## Instructions
 
 With your beverage of choice ready, and all of the above in order, it's finally time to test the crap out of this application!
-
-Roughly, we'll:
-
-- Deploy the stack so it's ready to use
-- Start outlining APIs (which form "contracts" or interfaces toward "consumers", i.e. applications)
 
 ### 1. Install dependencies
 
@@ -236,10 +229,16 @@ If you want to look at the pre-generated (and used) one, you'll find it under `s
 
 They are located under `__tests__/integration/`. Run them with `npm run test:jest`.
 
+You'll see that you get coverage metrics; if you have time and want a challenge, locate lines-of-code and bits of code that could need some more testing.
+
 ### 9. Run an end-to-end test
 
 It's located under `__tests__/e2e/`. Run it with `npm run test:e2e`. You'll first need to open up a second terminal with a local web server (`npm run dev`) for it to complete successfully.
 
+You'll notice that only the "happy paths" are covered. Reference the Codecept (with Playwright) documentation and start covering ordering multiple items, and maybe some "un-happy paths"!
+
 ### 10. Run a system test
 
 It's located under `__tests__/system/`. Run it with `npm run test:system`. You will have to update the ID and region values in `__tests__/system/index.ts` to your values. This also requires that the stack is deployed with Serverless first, since this is all using live components.
+
+The system test is simple, in as far as in our basic demo application a fully-formed order is just an order in the database. You could add additional logic to verify fields and data in the data you receive from the data.
