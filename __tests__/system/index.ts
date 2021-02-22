@@ -24,12 +24,9 @@ const WAIT_TIME = 5000;
 // Time to wait until running next iteration in call-loop
 const LOOP_WAIT_TIME = 150;
 // How many test orders to produce
-const TEST_COUNT = 2;
+const TEST_COUNT = 25;
 // Test can be an empty object, in which case defaults will be used
-const TEST_CONFIG = {
-  customerType: 'B2C',
-  market: 'US'
-};
+const TEST_CONFIG = {};
 
 /**
  * @description Full system test, starting with a number of test orders and verify presence in order database at the end.

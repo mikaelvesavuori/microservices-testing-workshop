@@ -150,6 +150,8 @@ Run `npm run install:all`.
 
 Run `npm run dev` to start up the local web server. Go to one of the provided URLs to see the site. Click around and get a feel for the app.
 
+Press CTRL+C to exit when you are done.
+
 ### 3. Discovery and baseline quality
 
 Check out the directory structure. The backends follow the well-known [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) pattern.

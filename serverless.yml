@@ -1,5 +1,5 @@
 service:
-  name: microservices-testing-ws
+  name: microservices-testing-ws # EDIT THIS TO YOUR VALUE
 
 provider:
   name: aws

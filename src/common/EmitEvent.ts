@@ -26,7 +26,6 @@ export async function emitEvent(
      */
     if (process.env.NODE_ENV !== 'test') await eventBridge.send(event);
     return event.input.Entries[0];
-    return undefined;
   } catch (error) {
     throw new Error('Failed to emit event!');
   }
