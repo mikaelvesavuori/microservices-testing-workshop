@@ -1,3 +1,5 @@
+.dccache
+
 # Tests
 /jest-coverage
 **/jest-coverage
