@@ -1,4 +1,7 @@
 .dccache
+.DS_Store
+
+docs/
 
 # Tests
 /jest-coverage

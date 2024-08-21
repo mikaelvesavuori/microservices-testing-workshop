@@ -12,7 +12,7 @@ import { events } from './events';
 export async function emitEvent(
   eventName: string,
   data: Record<string, unknown>
-): Promise<Record<string, unknown> | undefined> {
+): Promise<any> {
   if (!eventName || typeof eventName !== 'string' || !data || typeof data !== 'object')
     throw new Error('Missing eventName and/or data!');
 
