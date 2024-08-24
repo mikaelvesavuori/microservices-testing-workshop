@@ -3,7 +3,11 @@ service:
 
 provider:
   name: aws
-  runtime: nodejs18.x
+  runtime: nodejs20.x
+  region: ${opt:region, "eu-north-1"}
+  endpointType: EDGE
+  memorySize: 1024
+  timeout: 15
   stackTags:
     Usage: microservices-testing-ws
   tags:
@@ -12,21 +16,18 @@ provider:
     apiGateway: true
   apiGateway:
     minimumCompressionSize: 1024
-  region: ${opt:region, "eu-north-1"}
-  endpointType: EDGE
-  memorySize: 1024
-  timeout: 15
   logRetentionInDays: 7
   deploymentBucket:
     blockPublicAccess: true
     serverSideEncryption: AES256
-  iamRoleStatements:
-  - Effect: Allow
-    Action:
-      - xray:PutTelemetryRecords
-      - xray:PutTraceSegments
-    Resource: "*"
-
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - xray:PutTraceSegments
+            - xray:PutTelemetryRecords
+          Resource: "*"
 custom:
   allowedOrigin: "*" # Ideally don't use this; scope down to your actual domain
   appDeliveryPage: https://mydomain.com/delivery.html?order=
@@ -38,22 +39,17 @@ custom:
     arns:
       dynamoTable: arn:aws:dynamodb:${self:provider.region}:${self:custom.aws.awsAccountId}:table/${self:custom.aws.resources.tableName}
       eventbridgeBus: arn:aws:events:${self:provider.region}:${self:custom.aws.awsAccountId}:event-bus/default
-  webpack:
-    webpackConfig: 'webpack.config.js'
-    includeModules: true
-    packager: 'npm'
-    excludeFiles: src/**/*.test.js
+  esbuild:
+    bundle: true
+    minify: true
 
 plugins:
+  - serverless-esbuild
   - serverless-offline
-  - serverless-webpack
   - serverless-iam-roles-per-function
 
 package:
   individually: true
-  exclude:
-    - node_modules/aws-sdk/**
-    - node_modules/aws-lambda/**
 
 functions:
   # Order service (public)

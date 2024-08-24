@@ -43,13 +43,12 @@ Testing types demonstrated:
 
 - [Serverless Framework](https://www.serverless.com)
 - [Typescript](https://www.typescriptlang.org)
-- [Webpack](https://webpack.js.org)
 - [local-web-server](https://github.com/lwsjs/local-web-server)
 
 ## Pre-requisites
 
-- [Node 14+](https://nodejs.org/en/download/) installed
-- [Serverless Framework 2.23.0+](https://www.serverless.com) installed
+- [Node 20+](https://nodejs.org/en/download/) installed
+- [Serverless Framework 3](https://www.serverless.com) installed
 - [An Amazon Web Services (AWS) account](https://aws.amazon.com/free/)
 - [AWS credentials available through your environment](https://www.serverless.com/framework/docs/providers/aws/guide/credentials/)
 - Some familiarity with programming (Javascript/Typescript/Node) and command-line usage will be very helpful
@@ -66,16 +65,16 @@ Following the workshop steps is selective and the main format will be a guided t
 
 To follow along you will need:
 
-- A Command Line Interface or "terminal": in Windows I recommend Windows Terminal (https://aka.ms/terminal) or PowerShell 7 (https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell-core-on-windows?view=powershell-7.1); for Mac the built-in Terminal will work just fine
+- A Command Line Interface or "terminal": in Windows I recommend [Windows Terminal](https://aka.ms/terminal) or [PowerShell 7](https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell-core-on-windows?view=powershell-7.1); for Mac the built-in Terminal will work just fine
 - Basic familiarity with navigating directories with your Terminal — you should be able to do most of that using `cd [directory_name]`
-- Git installed (https://git-scm.com/downloads)
-- Node 14 or 15 installed (https://nodejs.org/en/); ensure installation by running `node -v` and `npm -v` after installing and rebooting your CLI/Terminal
-- Serverless Framework installed (https://www.serverless.com); install it by running `npm install -g serverless` in your CLI/Terminal
-- Fresh AWS credentials in your system. Get them from https://polestardevhouse.awsapps.com/start/#/; click `polestar-dev-house-playground` and then `Command line or programmatic access` next to whatever your privilege type is called. Then follow https://www.serverless.com/framework/docs/providers/aws/guide/credentials/ to set credentials.
+- [Git]((https://git-scm.com/downloads)) installed
+- [Node](https://nodejs.org/en/); ensure installation by running `node -v` and `npm -v` after installing and rebooting your CLI/Terminal
+- [Serverless Framework](https://www.serverless.com) installed; install it by running `npm install -g serverless` in your CLI/Terminal
+- Fresh AWS credentials in your system
 
 The most basic way of setting values if you are on Windows is to add your values (from the SSO console) to the below block, and run it in your terminal:
 
-```
+```text
 $env:AWS_ACCESS_KEY_ID = 'value'
 $env:AWS_SECRET_ACCESS_KEY = 'value'
 $env:AWS_SESSION_TOKEN = 'value'
@@ -83,9 +82,9 @@ $env:AWS_SESSION_TOKEN = 'value'
 
 Ideally you will also use:
 
-- Visual Studio Code (https://code.visualstudio.com)
-- Plugins for Prettier and ESLint; for VS Code these are at https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode and https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint
-- Insomnia Designer (https://insomnia.rest)
+- [Visual Studio Code](https://code.visualstudio.com)
+- Plugins for Prettier and ESLint; for VS Code these are at [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) and [eslint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+- A REST client like [httpie](https://httpie.io) or [Insomnia Designer](https://insomnia.rest)
 
 Please verify basic application functionality pre-workshop.
 
@@ -121,7 +120,7 @@ Reference: [https://idratherbewriting.com/learnapidoc/docapis_doc_sample_respons
 
 Change `customerType` and `market` as needed. `orgNumber` and `testId` are not required.
 
-```
+```text
 POST https://{UNIQUE_ID}.execute-api.{REGION}.amazonaws.com/dev/createOrder
 {
   "name": "Raina Mayert",
@@ -158,7 +157,7 @@ Check out the directory structure. The backends follow the well-known [Clean Arc
 
 Test ESLint by copying the following into a new file and saving it as `demo.js`:
 
-```
+```js
 function demo(value)
 {
   var x = value;
@@ -197,7 +196,7 @@ Open up Insomnia Designer. Drag the JSON file onto the Workspaces area. Create a
 
 To run an example call, go to the "Debug" tab, click `POST /createOrder` on the left. Notice how there is a pre-populated (valid) call:
 
-```
+```json
 {
   "name": "Firstname Lastname",
   "email": "firstname.lastname@somewhere.xyz",
